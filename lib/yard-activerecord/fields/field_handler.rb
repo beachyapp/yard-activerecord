@@ -7,8 +7,15 @@ module YARD::Handlers::Ruby::ActiveRecord::Fields
     handles method_call(:boolean)
     handles method_call(:decimal)
     handles method_call(:timestamp)
+    handles method_call(:timestamps)
     handles method_call(:datetime)
     handles method_call(:date)
+
+    # Postgres/postgis data types
+    handles method_call(:jsonb)
+    handles method_call(:geometry)
+    handles method_call(:st_point)
+    handles method_call(:point)
 
     def process
       return unless statement.namespace.jump(:ident).source == 't'
