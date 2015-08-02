@@ -8,6 +8,10 @@ module YARD::Handlers::Ruby::ActiveRecord::Fields
     def process
       return unless globals.ar_schema
       globals.klass = ActiveSupport::Inflector.singularize call_params.first.camelize
+
+      # HACK THE WORLD !!!
+      globals.klass = "Beachy::Model::#{globals.klass}"
+
       if P(globals.klass).class == YARD::CodeObjects::Proxy
         # Try module with the first part
         globals.klass = globals.klass.underscore.split('_',2).map(&:camelize).join('::')
